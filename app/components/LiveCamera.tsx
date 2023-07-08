@@ -10,7 +10,7 @@ export default function LiveCameraButton() {
     const scanBarcode = () => {
         // TODO: Move this to layout.tsx and test initialization process before page load
         ScanditSDK.configure(SCANDIT_KEY, {
-            engineLocation: "build/",
+            engineLocation: "https://cdn.jsdelivr.net/npm/scandit-sdk@5.x/build/",
         }).then(() => {
             // TODO: Make this async await later
             // ScanditSDK is ready to use. Scan barcodes here
