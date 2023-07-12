@@ -18,9 +18,9 @@ export default function FileUpload({ onFileSelect }: FileUploadProps) {
 
     return (
         <div>
-            <label htmlFor="fileUpload" >
-                <Button size="large" variant="contained" component="span" startIcon={<AttachFileIcon />}>Upload</Button>
-            </label>
+            // <label htmlFor="fileUpload" >
+            //     <Button size="large" variant="contained" component="span" startIcon={<AttachFileIcon />}>Upload</Button>
+            // </label>
             <input className="hidden" onChange={onChangeHandler} type="file" id="fileUpload" accept=".png " ></input>
         </div>
 
