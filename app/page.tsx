@@ -1,26 +1,6 @@
-'use client'
-
-import { useState, useEffect } from 'react';
-import Button from '@mui/material/Button';
-import Counter from './components/counter';
-import FileUpload from './components/FileUpload';
-import UploadView from './views/UploadView';
-import LiveCameraButton from './components/LiveCamera';
+import LiveCameraButton from './lib/component/LiveCamera';
 
 export default function Home() {
-  const [buttonTitle, setButtonTitle] = useState("Hello World");
-
-  useEffect(() => {
-      document.title = 'Decipher';
-  }, []);
-
-  const onButtonClick = () => {
-    if (buttonTitle === "Hello World") {
-      setButtonTitle("Goodbye");
-    } else {
-      setButtonTitle("Hello World");
-    }
-  }
 
   return (
     <div>

@@ -1,4 +1,4 @@
-import FileUpload from "../components/FileUpload"
+import FileUpload from "../app/lib/component/FileUpload"
 
 export default function UploadView() {
     const onFileSelect = (file: File) => {
