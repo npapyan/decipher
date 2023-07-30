@@ -1,15 +1,16 @@
-// API To call nutrition api and store values in database (mongoDB)
-import { getFoodByUpcId, save } from "./DbService";
+// Purpose: Service to get nutrition facts from USDA API
+import { USDA_COLLECTION, getFoodByUpcIdFromCollection, saveToCollection } from "./DbService";
 import { USDA_FOOD_DATA_API_KEY } from "../lib/constant/secrets";
 
 const baseServiceUrl = 'https://api.nal.usda.gov/fdc';
 const queryEndpoint = '/v1/foods/search';
 let paramMap = new Map();
 
+// TODO: Refactor so that server will return a React component with the data instead of just the data
+
 export async function getNutritionFacts(upcId: string): Promise<any> {
     console.log("UPC ID" + upcId);
     let data = await getNutritionFactsFromDb(upcId);
-    console.log(data);
     if (data === undefined || data.length === 0) {
         const url = genUrlParams(upcId);
         console.log(url);
@@ -22,15 +23,16 @@ export async function getNutritionFacts(upcId: string): Promise<any> {
         data._id = upcId;
         saveNutritionFacts(data);
     }
+    console.log(data);
     return data;
 }
 
 export async function getNutritionFactsFromDb(upcId: string): Promise<any> {
-    return await getFoodByUpcId(upcId);
+    return await getFoodByUpcIdFromCollection(upcId, USDA_COLLECTION);
 }
 
 export async function saveNutritionFacts(jsonInput: any) {
-    save(jsonInput);
+    saveToCollection(jsonInput, USDA_COLLECTION);
 }
 
 function populateParamMap(upcId: string) {

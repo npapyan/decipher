@@ -1,7 +1,7 @@
 'use client'
 import { SCANDIT_KEY } from '../constant/secrets';
 import { Barcode, BarcodePicker, ScanSettings } from "scandit-sdk";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import * as ScanditSDK from "scandit-sdk";
 import Button from '@mui/material/Button';
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
@@ -16,7 +16,7 @@ const style: React.CSSProperties = {
   maxHeight: "1000px",
 };
 
-export default function Scanner({setFoodData}: any) {
+export default function ScanditScanner({setFoodData}: any) {
     const [isCameraEnabled, setIsCameraEnabled] = useState(false);
 
     async function runScanner() {
@@ -46,10 +46,12 @@ export default function Scanner({setFoodData}: any) {
             barcodePicker.on("scan", (scanResult) => {
                 async function fetchData() {
                     const data = await getData(scanResult.barcodes[0].data);
-                    if (data && data.length > 0) {
+                    console.log(data);
+                    if (data) {
                         barcodePicker.destroy();
                         setIsCameraEnabled(false);
-                        setFoodData(data[0]);
+                        console.log(data);
+                        setFoodData(data);
                     } else {
                         alert("No data found");
                     }
@@ -60,7 +62,7 @@ export default function Scanner({setFoodData}: any) {
     }
 
     return (
-        <div className="flex items-center justify-center">
+        <div className="flex items-center">
             <Button disabled={isCameraEnabled} size="large" variant="contained" component="span" onClick={runScanner} startIcon={<PhotoCameraIcon />}>Camera</Button>
             <div id="barcode-scanner" style={style}></div>
         </div>
@@ -69,11 +71,9 @@ export default function Scanner({setFoodData}: any) {
 
 async function getData(barcode: string) {
     // Remove the first zero from the upcId
-    console.log(barcode);
     if (barcode.charAt(0) === '0') {
         barcode = barcode.substring(1);
     }
-    console.log(barcode);
     const response = await fetch('/api/nutrition/' + barcode);
     const data = await response.json();
     return data;

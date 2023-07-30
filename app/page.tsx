@@ -6,8 +6,8 @@ export default function Home() {
     <div>
       <h1 className="text-center text-4xl mt-4">Decipher</h1>
       <h3 className="text-center text-2xl mb-4 text-gray-400">Upload or Scan a barcode below to view analysis</h3>
-      <div className="flex mx-auto items-center justify-center">
-        <div className="m-2">
+      <div className="flex mx-auto justify-center">
+        <div>
           <LiveCameraButton />
         </div>
       </div>
