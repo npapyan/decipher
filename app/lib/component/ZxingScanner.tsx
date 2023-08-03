@@ -3,9 +3,9 @@
 import { BrowserBarcodeReader } from '@zxing/library';
 
 export default function ZxingScanner({ setFoodData }: any) {
-    // Initialize the code reader once the component mounts
-    const codeReader = new BrowserBarcodeReader();
-    console.log('ZXing code reader initialized');
+  // Initialize the code reader once the component mounts
+  const codeReader = new BrowserBarcodeReader();
+  console.log('ZXing code reader initialized');
 
   const startScanner = () => {
     // Get the video stream from the camera
@@ -22,33 +22,29 @@ export default function ZxingScanner({ setFoodData }: any) {
 
         // Decode frames from the video stream
         codeReader.decodeFromVideoDevice(null, video, (result, error) => {
-            if (result) {
-              // Barcode detected
-              console.log(result);
-              alert(result.getText());
+          if (result) {
+            // Barcode detected
+            console.log(result);
+            alert(result.getText());
 
-                async function fetchData() {
-                    const data = await getData(result.getText());
-                    console.log(data);
-                    if (data) {
-                        // setIsCameraEnabled(false);
-                        console.log(data);
-                        setFoodData(data);
-                    } else {
-                        alert("No data found");
-                    }
-                }
-                fetchData();
-
-            //   setFoodData(result.getText());
-              stopScanner();
-            } else {
-              // Error occurred or barcode not detected yet
-              if (error) {
-                console.error(error);
+            //@ts-ignore
+            async function fetchData() {
+              const data = await getData(result.getText());
+              console.log(data);
+              if (data) {
+                // setIsCameraEnabled(false);
+                console.log(data);
+                setFoodData(data);
+              } else {
+                alert("No data found");
               }
             }
-          });
+            fetchData();
+
+            //   setFoodData(result.getText());
+            stopScanner();
+          }
+        });
       })
       .catch((error) => {
         console.error('Error accessing the camera: ', error);
@@ -76,7 +72,7 @@ export default function ZxingScanner({ setFoodData }: any) {
 }
 
 async function getData(barcode: string) {
-    const response = await fetch('/api/nutrition/' + barcode);
-    const data = await response.json();
-    return data;
+  const response = await fetch('/api/nutrition/' + barcode);
+  const data = await response.json();
+  return data;
 }

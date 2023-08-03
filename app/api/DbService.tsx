@@ -1,17 +1,17 @@
 import { Db, MongoClient, ServerApiVersion } from "mongodb";
-import { DB_USER, DB_PASS, DB_URI } from "../lib/constant/secrets";
+import { DB_USER, DB_PASS, DB_URI } from "@/app/constants/secrets";
 
 const DB_NAME = "Nutrition";
 export const USDA_COLLECTION = "facts";
 export const OPEN_FOOD_FACTS_COLLECTION = "openfoodfacts_data";
-const uri = "mongodb+srv://" + DB_USER + ":" + DB_PASS + DB_URI; 
+const uri = "mongodb+srv://" + DB_USER + ":" + DB_PASS + DB_URI;
 
-const client = new MongoClient( uri, {
-    serverApi: {
-        version: ServerApiVersion.v1,
-        strict: true,
-        deprecationErrors: true,
-    } 
+const client = new MongoClient(uri, {
+  serverApi: {
+    version: ServerApiVersion.v1,
+    strict: true,
+    deprecationErrors: true,
+  }
 });
 
 /**
@@ -20,14 +20,14 @@ const client = new MongoClient( uri, {
  * @param collectionName - name of collection to save to
  */
 export async function saveToCollection(jsonInput: any, collectionName: string) {
-    try {
-        await client.connect();
-        const myDB = client.db(DB_NAME);
-        const myColl = myDB.collection(collectionName);
-        const result = await myColl.insertOne(jsonInput);
-    } finally {
-        await client.close();
-    }
+  try {
+    await client.connect();
+    const myDB = client.db(DB_NAME);
+    const myColl = myDB.collection(collectionName);
+    const result = await myColl.insertOne(jsonInput);
+  } finally {
+    await client.close();
+  }
 }
 
 /**
@@ -37,14 +37,14 @@ export async function saveToCollection(jsonInput: any, collectionName: string) {
  * @returns - json object of food data
  */
 export async function getFoodByUpcIdFromCollection(upcId: string, collectionName: string): Promise<any> {
-    try {
-        const query: any = {_id: upcId}
-        await client.connect();
-        const myDB = client.db(DB_NAME);
-        const myColl = myDB.collection(collectionName);
-        const result = await myColl.find(query).toArray();
-        return result;
-    } finally {
-        await client.close();
-    }
+  try {
+    const query: any = { _id: upcId }
+    await client.connect();
+    const myDB = client.db(DB_NAME);
+    const myColl = myDB.collection(collectionName);
+    const result = await myColl.find(query).toArray();
+    return result;
+  } finally {
+    await client.close();
+  }
 }
