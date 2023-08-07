@@ -1,5 +1,5 @@
 'use client'
-import { SCANDIT_KEY } from '@/app/constants/secrets';
+import { SCANDIT_KEY } from '@/app/lib/constant/secrets';
 import { Barcode, BarcodePicker, ScanSettings } from "scandit-sdk";
 import { useState } from 'react';
 import * as ScanditSDK from "scandit-sdk";

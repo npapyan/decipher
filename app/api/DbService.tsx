@@ -1,5 +1,5 @@
 import { Db, MongoClient, ServerApiVersion } from "mongodb";
-import { DB_USER, DB_PASS, DB_URI } from "@/app/constants/secrets";
+import { DB_USER, DB_PASS, DB_URI } from "@/app/lib/constant/secrets";
 
 const DB_NAME = "Nutrition";
 export const USDA_COLLECTION = "facts";

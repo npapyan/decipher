@@ -1,5 +1,7 @@
 // import { useEffect, useRef } from 'react';
 'use client'
+import Button from '@mui/material/Button';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import { BrowserBarcodeReader } from '@zxing/library';
 
 export default function ZxingScanner({ setFoodData }: any) {
@@ -32,7 +34,6 @@ export default function ZxingScanner({ setFoodData }: any) {
               const data = await getData(result.getText());
               console.log(data);
               if (data) {
-                // setIsCameraEnabled(false);
                 console.log(data);
                 setFoodData(data);
               } else {
@@ -40,8 +41,6 @@ export default function ZxingScanner({ setFoodData }: any) {
               }
             }
             fetchData();
-
-            //   setFoodData(result.getText());
             stopScanner();
           }
         });
@@ -65,8 +64,8 @@ export default function ZxingScanner({ setFoodData }: any) {
   };
 
   return (
-    <div>
-      <button onClick={startScanner}>Click me to scan!</button>
+    <div className="flex items-center justify-center">
+      <Button size="large" variant="contained" component="span" onClick={startScanner} startIcon={<PhotoCameraIcon />}>Camera</Button>
     </div>
   );
 }

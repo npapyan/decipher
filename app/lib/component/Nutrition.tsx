@@ -13,11 +13,11 @@ export default function Nutrition({foodData}) {
                     </div>
                     <div>
                         <div className="text-start">
-                            <p className="text-end">Total Fat: {foodData.foodNutrients.fat_serving ?? 0 } {foodData.foodNutrients.fat_unit}</p>
-                            <p className="text-end">Cholesterol: {foodData.foodNutrients.cholesteral_serving ?? 0} {foodData.foodNutrients.cholesteral_unit}</p>
-                            <p className="text-end">Sodium: {foodData.foodNutrients.sodium_serving ?? 0} {foodData.foodNutrients.sodium_unit}</p>
-                            <p className="text-end">Total Carbohydrate: {foodData.foodNutrients.carbohydrates_serving ?? 0} {foodData.foodNutrients.carbohydrates_unit}</p>
-                            <p className="text-end">Protein: {foodData.foodNutrients.proteins_serving ?? 0} {foodData.foodNutrients.proteins_unit}</p>
+                            <p className="text-end">Total Fat: {foodData.foodNutrients.fat_100g ?? 0 } {foodData.foodNutrients.fat_unit}</p>
+                            <p className="text-end">Cholesterol: {foodData.foodNutrients.cholesteral_100g ?? 0} {foodData.foodNutrients.cholesteral_unit}</p>
+                            <p className="text-end">Sodium: {foodData.foodNutrients.sodium_100g ?? 0} {foodData.foodNutrients.sodium_unit}</p>
+                            <p className="text-end">Total Carbohydrate: {foodData.foodNutrients.carbohydrates_100g ?? 0} {foodData.foodNutrients.carbohydrates_unit}</p>
+                            <p className="text-end">Protein: {foodData.foodNutrients.proteins_100g ?? 0} {foodData.foodNutrients.proteins_unit}</p>
                         </div>
                     </div>
                 </div>
