@@ -16,9 +16,10 @@ export async function getNutritionFacts(upcId: string): Promise<any> {
     if (data === undefined) {
       return undefined;
     }
-    // TODO: Verify that this is the correct id
     data._id = upcId;
     saveNutritionFacts(data);
+  } else {
+    data = data[0];
   }
   console.log(data);
   return data;
