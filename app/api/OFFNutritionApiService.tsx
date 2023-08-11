@@ -3,6 +3,9 @@ import { OPEN_FOOD_FACTS_COLLECTION, getFoodByUpcIdFromCollection, saveToCollect
 
 const baseServiceUrl = 'https://world.openfoodfacts.org/api/v2/product/';
 const urlEnd = '.json';
+const headers = new Headers({
+  "User-Agent" : "Decipher - WebApp - Version 1.0 - localhost/ngrok for now"
+});
 
 export async function getNutritionFacts(upcId: string): Promise<any> {
   console.log("UPC ID" + upcId);
@@ -10,7 +13,7 @@ export async function getNutritionFacts(upcId: string): Promise<any> {
   if (data === undefined || data.length === 0) {
     const url = genUrlParams(upcId);
     console.log(url);
-    let result = await fetch(url);
+    let result = await fetch(url, {headers : headers});
     data = await result.json();
     data = extractDataFromResults(data);
     if (data === undefined) {
