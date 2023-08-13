@@ -6,8 +6,6 @@ const baseServiceUrl = 'https://api.nal.usda.gov/fdc';
 const queryEndpoint = '/v1/foods/search';
 let paramMap = new Map();
 
-// TODO: Refactor so that server will return a React component with the data instead of just the data
-
 export async function getNutritionFacts(upcId: string): Promise<any> {
     console.log("UPC ID" + upcId);
     let data = await getNutritionFactsFromDb(upcId);
@@ -50,7 +48,6 @@ function genUrlParams(upcId: string) {
 }
 
 function extractDataFromResults(jsonInput: any) {
-    // TODO: test empty check below
     if (jsonInput.foods.length == 0) {
         return undefined;
     }
@@ -67,11 +64,6 @@ function extractDataFromResults(jsonInput: any) {
     delete formattedData.foodAttributeTypes
     delete formattedData.foodVersionIds
     return formattedData;
-}
-
-function formatNutrientsFromResults(jsonInput: any) {
-    // TODO: See if this is needed or if we can use data as is
-    return jsonInput;
 }
 
 // TODO: Work on healthy/unhealthy nutrition tagger after front-end is complete

@@ -12,9 +12,7 @@ interface CaloriesProp {
 const defaultCalorieRatio = 100;
 
 export default function Calories({ calories }: CaloriesProp ) {
-    // const [calculatedCalories, setCalculatedCalories] = useState(calories.calorieNumVal);
-
-    // TODO: Add useState to automatically update calorie value based on serving size
+    // TODO: Fix serving size calc for initial render (shows as NaN because serving size is string)
     if (calories.servingSize != null) {
         calories.calorieNumVal = (calcCaloriesWithServingSize(calories.calorieNumVal, calories.servingSize));
         console.log("Serve size in calories: " + calories.calorieNumVal);
@@ -31,6 +29,5 @@ export default function Calories({ calories }: CaloriesProp ) {
 }
 
 function calcCaloriesWithServingSize(calories: number, servingSize: number): number {
-    console.log("MATH: " + calories + " * " + servingSize );
     return Math.round((calories * servingSize) / defaultCalorieRatio);
 }
