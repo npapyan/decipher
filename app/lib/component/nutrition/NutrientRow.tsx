@@ -11,7 +11,8 @@ interface NutrientProp {
 }
 
 export default function NutrientRow({ nutrient }: NutrientProp) {
-    // TODO: have logic to recalculate percentDailyValue if user adds correct serving size, otherwise all values are from 100g of the item
+    // TODO: Display image of package if available in response
+    // TODO: Display Ingredients if available
     const nutrientClass = nutrient.isPrimary ? "font-bold pr-1" : "pr-1 pl-2"
     const percentDailyValue = nutrient.value ? (nutrient.value/nutrient.dailyValue) * 100 : 0;
     return (

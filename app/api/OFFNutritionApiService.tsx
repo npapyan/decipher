@@ -46,7 +46,6 @@ function genUrlParams(upcId: string) {
  * @returns - shortened json object with only necessary data
  */
 function extractDataFromResults(jsonInput: any) {
-  // TODO: Verify status code
   if (jsonInput.status == 0) {
     return undefined;
   }
@@ -59,11 +58,7 @@ function extractDataFromResults(jsonInput: any) {
   formattedData.foodNutrients = jsonInput.product.nutriments;
   formattedData.categories = jsonInput.product.categories;
   formattedData.servingSize = jsonInput.product.serving_size;
+  formattedData.imageUrl = jsonInput.image_front_url;
+  formattedData.imageUrlSm = jsonInput.image_front_small_url;
   return formattedData;
 }
-
-function formatNutrientsFromResults(jsonInput: any) {
-  // TODO: See if this is needed or if we can use data as is
-  return jsonInput;
-}
-// TODO: Work on healthy/unhealthy nutrition tagger after front-end is complete

@@ -1,11 +1,11 @@
 'use client'
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
-import Nutrition from './Nutrition';
-import ZxingScanner from './ZxingScanner';
+import Nutrition from './nutrition/Nutrition';
+import ZxingScanner from './scanner/ZxingScanner';
 
 export default function LiveCameraButton() {
-    const Scanner = dynamic(() => import('./ScanditScanner'), { ssr: false });
+    const Scanner = dynamic(() => import('./scanner/ScanditScanner'), { ssr: false });
     const [foodData, setFoodData] = useState({
             brandName : "",
             description : "",
@@ -22,7 +22,6 @@ export default function LiveCameraButton() {
 
     return (
         <div>
-            {/* <Scanner setFoodData={updateFoodData} /> */}
             <ZxingScanner setFoodData={updateFoodData}></ZxingScanner>
             {foodData.brandName !== "" ? ( 
                 <Nutrition foodData={foodData} />

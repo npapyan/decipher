@@ -10,16 +10,21 @@ export default function ZxingScanner({ setFoodData }: any) {
   console.log('ZXing code reader initialized');
 
   const startScanner = () => {
+    // TODO: Hide nutritionfacts if user enables camera
+    // TODO: Provide a way to cancel camera viewfinder if we no longer want to scan
     // Get the video stream from the camera
     navigator.mediaDevices
       .getUserMedia({ video: { facingMode: 'environment' } }) // Use 'environment' for rear camera, 'user' for front camera
       .then((stream) => {
-        const video = document.createElement('video');
-        video.srcObject = stream;
-        video.playsInline = true;
+        let video = document.querySelector('video');
+        if (!video) {
+          video = document.createElement('video');
+          video.srcObject = stream;
+          video.playsInline = true;
 
-        // Attach the video to the DOM to show the camera viewer
-        document.body.appendChild(video);
+          // Attach the video to the DOM to show the camera viewer
+          document.body.appendChild(video);
+        }
         video.play();
 
         // Decode frames from the video stream
