@@ -4,21 +4,28 @@ type Nutrient = {
     unit: string;
     dailyValue: number;
     isPrimary: boolean;
+    servingSize?: number | null;
 }
 
 interface NutrientProp {
     nutrient: Nutrient;
 }
 
+const defaultNutrientRatio = 100; // since all values are by default from 100 grams
+
 export default function NutrientRow({ nutrient }: NutrientProp) {
+    if (nutrient.servingSize != null) {
+        nutrient.value = (calcNutrientWithServingSize(nutrient.value, nutrient.servingSize));
+    }
     const nutrientClass = nutrient.isPrimary ? "font-bold pr-1" : "pr-1 pl-2"
     const percentDailyValue = nutrient.value ? (nutrient.value/nutrient.dailyValue) * 100 : 0;
+
     return (
         <>
             <div className="py-2 flex flex-start justify-between">
                 <div className="flex">
                     <p className={nutrientClass}>{nutrient.name}: </p>
-                    <p>{nutrient.value ?? 100} {nutrient.unit}</p>
+                    <p>{nutrient.value ?? 0} {nutrient.unit}</p>
                 </div>
                 <div className="flex">
                     <p className="font-bold">{Math.round(percentDailyValue)}%</p>
@@ -27,4 +34,8 @@ export default function NutrientRow({ nutrient }: NutrientProp) {
             <hr />
         </>
     )
+}
+
+function calcNutrientWithServingSize(nutrientValue: number, servingSize: number): number {
+    return Math.round((nutrientValue * servingSize) / defaultNutrientRatio);
 }
