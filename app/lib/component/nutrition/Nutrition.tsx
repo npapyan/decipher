@@ -1,6 +1,6 @@
 import NutrientRow from "./NutrientRow";
 import Calories from "./Calories";
-import ServingSize from "./ServingSize";
+import ServingSize, { extractServingSizeNum } from "./ServingSize";
 import { dailyValueAdultMap } from "../../service/DailyValueService";
 import { useState } from 'react';
 
@@ -8,7 +8,7 @@ import { useState } from 'react';
 // TODO: Display image of package if available in response
 // TODO: Display Ingredients if available
 export default function Nutrition({foodData}) {
-    const [servingSizeValue, setServingSizeValue] = useState<number | null>(foodData.servingSize);
+    const [servingSizeValue, setServingSizeValue] = useState<number | null>(null);
 
     const handleServingSizeChange = (newServingSize) => {
         setServingSizeValue(newServingSize);

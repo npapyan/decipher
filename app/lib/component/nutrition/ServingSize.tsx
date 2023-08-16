@@ -1,5 +1,6 @@
 const numberRegex: RegExp = /\d+/;
 
+// TODO: What happens when item is in ml or fl oz (drinks)
 export default function ServingSize({servingSize, onValueChange}) {
     servingSize = extractServingSizeNum(servingSize);
 
@@ -8,7 +9,10 @@ export default function ServingSize({servingSize, onValueChange}) {
     );
 }
 
-function extractServingSizeNum(servingSizeStr: string): number | null {
+export function extractServingSizeNum(servingSizeStr: string): number | null {
+    if (servingSizeStr === null) {
+        return 100;
+    }
     let extractedNum: RegExpMatchArray | null = null;
     if (!isNaN(+servingSizeStr)) {
         return Number(servingSizeStr);
