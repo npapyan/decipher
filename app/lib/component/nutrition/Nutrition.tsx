@@ -3,8 +3,8 @@ import Calories from "./Calories";
 import ServingSize from "./ServingSize";
 import { dailyValueAdultMap } from "../../service/DailyValueService";
 import { useState } from 'react';
+import { healthyValueMap } from "../../service/HealthService";
 
-// TODO: Add servingSize calculation to NutrientRow
 // TODO: Display image of package if available in response
 // TODO: Display Ingredients if available
 export default function Nutrition({foodData}) {
@@ -33,7 +33,7 @@ export default function Nutrition({foodData}) {
                             <NutrientRow nutrient={{name: 'Total Fat', value: foodData.foodNutrients.fat_100g, unit: foodData.foodNutrients.fat_unit, dailyValue: dailyValueAdultMap.get('fat')!, isPrimary: true, servingSize: servingSizeValue}}></NutrientRow>
                             <NutrientRow nutrient={{name: 'Saturated Fat', value: foodData.foodNutrients['saturated-fat_100g'], unit: foodData.foodNutrients['saturated-fat_unit'], dailyValue: dailyValueAdultMap.get('saturated_fat')!, isPrimary: false, servingSize: servingSizeValue}}></NutrientRow>
                             <NutrientRow nutrient={{name: 'Cholesterol', value: foodData.foodNutrients.cholesteral_100g, unit: foodData.foodNutrients.cholesteral_unit, dailyValue: dailyValueAdultMap.get('cholesterol')!, isPrimary: true, servingSize: servingSizeValue}}></NutrientRow>
-                            <NutrientRow nutrient={{name: 'Sodium', value: foodData.foodNutrients.sodium_100g, unit: foodData.foodNutrients.sodium_unit, dailyValue: dailyValueAdultMap.get('sodium')!,  isPrimary: true, servingSize: servingSizeValue}}></NutrientRow>
+                            <NutrientRow nutrient={{name: 'Sodium', value: foodData.foodNutrients.sodium_100g, unit: foodData.foodNutrients.sodium_unit, dailyValue: dailyValueAdultMap.get('sodium')!,  isPrimary: true, servingSize: servingSizeValue, healthyRange: healthyValueMap.get('sodium')}}></NutrientRow>
                             <NutrientRow nutrient={{name: 'Total Carbohydrate', value: foodData.foodNutrients.carbohydrates_100g, unit: foodData.foodNutrients.carbohydrates_unit, dailyValue: dailyValueAdultMap.get('total_carbohydrate')!,  isPrimary: true, servingSize: servingSizeValue}}></NutrientRow>
                             <NutrientRow nutrient={{name: 'Total Sugars', value: foodData.foodNutrients.sugars_100g, unit: foodData.foodNutrients.sugars_unit, dailyValue: dailyValueAdultMap.get('added_sugar')!,  isPrimary: false, servingSize: servingSizeValue}}></NutrientRow>
                             <NutrientRow nutrient={{name: 'Protein', value: foodData.foodNutrients.proteins_100g, unit: foodData.foodNutrients.proteins_unit, dailyValue: dailyValueAdultMap.get('protein')!,  isPrimary: true, servingSize: servingSizeValue}}></NutrientRow>
